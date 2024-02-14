@@ -1,4 +1,4 @@
-//First Javascript project. At this point will only run in console.
+//First Javascript project. Project uses alerts and console logs
 function getComputerChoice() {
     let computerChoice;
     let randomNumber = Math.floor(Math.random() * 3) + 1;
@@ -20,18 +20,17 @@ function getComputerChoice() {
 }
 function getPlayerChoice() {
 
-    let playerChoice = prompt("ROCK PAPER SCISSORS?");
+    game++;
+    console.log("Game #: " + game);
+    let playerChoice = prompt("GAME#" + game + "/5 ROCK PAPER SCISSORS?");
     playerChoice = playerChoice.toLowerCase();
     if (playerChoice === "rock") {
-        alert("you chose rock");
         return playerChoice;
     }
     else if (playerChoice === "paper") {
-        alert("you chose paper");
         return playerChoice;
     }
     else if (playerChoice === "scissors") {
-        alert("you chose scissors");
         return playerChoice;
     }
     else {
@@ -44,49 +43,70 @@ function playRound(playerSelection, computerSelection) {
     console.log("Player chose: " + playerSelection);
     console.log("Computer chose: " + computerSelection);
     let results;
-    if (playerSelection===computerSelection){
+    if (playerSelection === computerSelection) {
         alert("TIE!")
         results = "TIE!";
     }
-    else if (playerSelection === "rock" && computerSelection === "paper")
-    {
+    else if (playerSelection === "rock" && computerSelection === "paper") {
         alert("You lose: " + computerSelection + " beats " + playerSelection);
         results = ("You lose: " + computerSelection + " beats " + playerSelection);
+        computerWon++;
     }
-    else if (playerSelection === "rock" && computerSelection === "scissors")
-    {
+    else if (playerSelection === "rock" && computerSelection === "scissors") {
         alert("You win: " + playerSelection + " beats " + computerSelection);
         results = ("You win: " + playerSelection + " beats " + computerSelection);
+        playerWon++;
     }
-    else if (playerSelection === "paper" && computerSelection === "scissors")
-    {
+    else if (playerSelection === "paper" && computerSelection === "scissors") {
         alert("You lose: " + computerSelection + " beats " + playerSelection);
         results = ("You lose: " + computerSelection + " beats " + playerSelection);
+        computerWon++;
     }
-    else if (playerSelection === "paper" && computerSelection === "rock")
-    {
+    else if (playerSelection === "paper" && computerSelection === "rock") {
         alert("You win: " + playerSelection + " beats " + computerSelection);
         results = ("You win: " + playerSelection + " beats " + computerSelection);
+        playerWon++;
     }
-    else if (playerSelection === "scissors" && computerSelection === "rock")
-    {
+    else if (playerSelection === "scissors" && computerSelection === "rock") {
         alert("You lose: " + computerSelection + " beats " + playerSelection);
         results = ("You lose: " + computerSelection + " beats " + playerSelection);
+        computerWon++;
     }
-    else if (playerSelection === "scissors" && computerSelection === "paper")
-    {
+    else if (playerSelection === "scissors" && computerSelection === "paper") {
         alert("You win: " + playerSelection + " beats " + computerSelection);
         results = ("You win: " + playerSelection + " beats " + computerSelection);
+        playerWon++;
     }
-    else{
+    else {
         alert("ERROR!")
     }
+
     return results;
 }
-let playerChoice = getPlayerChoice();
-let computerChoice = getComputerChoice();
-let results = playRound(playerChoice, computerChoice);
-console.log(results);
+function playGame(){
+    for(let i=0; i<5; i++){
+    let playerChoice = getPlayerChoice();
+    let computerChoice = getComputerChoice();
+    let results = playRound(playerChoice, computerChoice);
+    console.log(results);
+    }
+    if (playerWon === computerWon){
+        {
+            alert("TIE!")
+            console.log("TIE! " + playerWon + " : " + computerWon);
+        }
+    }
+    else if(playerWon > computerWon){
+        alert("Player Won: " + playerWon + " : " + computerWon);
+        console.log("Final Results- Player Won " + playerWon + " : " + computerWon);
+    }
+    else if (computerWon > playerWon){
+        alert("Computer Won: " + computerWon + " : " + playerWon);
+        console.log("Final Results- Computer Won: " + computerWon + " : " + playerWon);
+    }
+}
 
-
-
+playerWon = 0; //global counter variables
+computerWon = 0; 
+game = 0;
+playGame(); // Start of Game

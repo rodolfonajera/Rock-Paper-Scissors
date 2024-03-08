@@ -1,19 +1,19 @@
-//First Javascript project. Project uses alerts and console logs
+const rockBtn = document.querySelector('#rockButton');
+const paperBtn = document.querySelector('#paperButton');
+const scissorsBtn = document.querySelector('#scissorsButton');
+
 function getComputerChoice() {
     let computerChoice;
     let randomNumber = Math.floor(Math.random() * 3) + 1;
     switch (randomNumber) {
         case (1):
             computerChoice = "rock";
-            alert("Computer chose rock");
             break;
         case (2):
             computerChoice = "paper";
-            alert("Computer chose paper");
             break;
         case (3):
             computerChoice = "scissors";
-            alert("Computer chose scissors");
             break;
     }
     return computerChoice;
@@ -41,7 +41,9 @@ function getPlayerChoice() {
 }
 function playRound(playerSelection, computerSelection) {
     console.log("Player chose: " + playerSelection);
+    alert("Player chose: " + playerSelection);
     console.log("Computer chose: " + computerSelection);
+    alert("Computer chose: " + computerSelection);
     let results;
     if (playerSelection === computerSelection) {
         alert("TIE!")
@@ -83,30 +85,46 @@ function playRound(playerSelection, computerSelection) {
 
     return results;
 }
-function playGame(){
-    
-    let playerChoice = getPlayerChoice();
-    let computerChoice = getComputerChoice();
-    let results = playRound(playerChoice, computerChoice);
-    console.log(results);
- 
-    if (playerWon === computerWon){
-        {
-            alert("TIE!")
-            console.log("TIE! " + playerWon + " : " + computerWon);
-        }
-    }
-    else if(playerWon > computerWon){
-        alert("Player Won: " + playerWon + " : " + computerWon);
-        console.log("Final Results- Player Won " + playerWon + " : " + computerWon);
-    }
-    else if (computerWon > playerWon){
-        alert("Computer Won: " + computerWon + " : " + playerWon);
-        console.log("Final Results- Computer Won: " + computerWon + " : " + playerWon);
-    }
+function playGame() {
+    let playerChoice = "";
+    rockBtn.addEventListener('click', () => {
+        playerChoice = "rock";
+        let computerChoice = getComputerChoice();
+        let results = playRound(playerChoice, computerChoice);
+        console.log(results);
+    });
+    paperBtn.addEventListener('click', () => {
+        playerChoice = "paper";
+        let computerChoice = getComputerChoice();
+        let results = playRound(playerChoice, computerChoice);
+        console.log(results);
+    });
+    scissorsBtn.addEventListener('click', () => {
+        playerChoice = "scissors";
+        let computerChoice = getComputerChoice();
+        let results = playRound(playerChoice, computerChoice);
+        console.log(results);
+    });
+
+    /*
+       if (playerWon === computerWon){
+           {
+               alert("TIE!")
+               console.log("TIE! " + playerWon + " : " + computerWon);
+           }
+       }
+       else if(playerWon > computerWon){
+           alert("Player Won: " + playerWon + " : " + computerWon);
+           console.log("Final Results- Player Won " + playerWon + " : " + computerWon);
+       }
+       else if (computerWon > playerWon){
+           alert("Computer Won: " + computerWon + " : " + playerWon);
+           console.log("Final Results- Computer Won: " + computerWon + " : " + playerWon);
+       }
+       */
 }
 
 playerWon = 0; //global counter variables
-computerWon = 0; 
+computerWon = 0;
 game = 0;
 playGame(); // Start of Game

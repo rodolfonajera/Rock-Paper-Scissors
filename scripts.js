@@ -84,12 +84,12 @@ function playRound(playerSelection, computerSelection) {
     return results;
 }
 function playGame(){
-    for(let i=0; i<5; i++){
+    
     let playerChoice = getPlayerChoice();
     let computerChoice = getComputerChoice();
     let results = playRound(playerChoice, computerChoice);
     console.log(results);
-    }
+ 
     if (playerWon === computerWon){
         {
             alert("TIE!")

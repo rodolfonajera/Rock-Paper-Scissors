@@ -1,6 +1,10 @@
 const rockBtn = document.querySelector('#rockButton');
 const paperBtn = document.querySelector('#paperButton');
 const scissorsBtn = document.querySelector('#scissorsButton');
+const resultsDiv = document.querySelector('#resultsDiv');
+const playerDiv = document.querySelector('#playerDiv');
+const computerDiv = document.querySelector('#computerDiv');
+
 
 function getComputerChoice() {
     let computerChoice;
@@ -39,43 +43,34 @@ function getPlayerChoice() {
     }
 
 }
-function playRound(playerSelection, computerSelection) {
+function getResults(playerSelection, computerSelection) {
     console.log("Player chose: " + playerSelection);
-    alert("Player chose: " + playerSelection);
     console.log("Computer chose: " + computerSelection);
-    alert("Computer chose: " + computerSelection);
     let results;
     if (playerSelection === computerSelection) {
-        alert("TIE!")
         results = "TIE!";
     }
     else if (playerSelection === "rock" && computerSelection === "paper") {
-        alert("You lose: " + computerSelection + " beats " + playerSelection);
         results = ("You lose: " + computerSelection + " beats " + playerSelection);
         computerWon++;
     }
     else if (playerSelection === "rock" && computerSelection === "scissors") {
-        alert("You win: " + playerSelection + " beats " + computerSelection);
         results = ("You win: " + playerSelection + " beats " + computerSelection);
         playerWon++;
     }
     else if (playerSelection === "paper" && computerSelection === "scissors") {
-        alert("You lose: " + computerSelection + " beats " + playerSelection);
         results = ("You lose: " + computerSelection + " beats " + playerSelection);
         computerWon++;
     }
     else if (playerSelection === "paper" && computerSelection === "rock") {
-        alert("You win: " + playerSelection + " beats " + computerSelection);
         results = ("You win: " + playerSelection + " beats " + computerSelection);
         playerWon++;
     }
     else if (playerSelection === "scissors" && computerSelection === "rock") {
-        alert("You lose: " + computerSelection + " beats " + playerSelection);
         results = ("You lose: " + computerSelection + " beats " + playerSelection);
         computerWon++;
     }
     else if (playerSelection === "scissors" && computerSelection === "paper") {
-        alert("You win: " + playerSelection + " beats " + computerSelection);
         results = ("You win: " + playerSelection + " beats " + computerSelection);
         playerWon++;
     }
@@ -85,25 +80,29 @@ function playRound(playerSelection, computerSelection) {
 
     return results;
 }
+function playRound(playerChoice)
+{
+    playerDiv.textContent = playerChoice;
+    let computerChoice = getComputerChoice();
+    computerDiv.textContent = computerChoice;
+    let results = getResults(playerChoice, computerChoice);
+    console.log(results);
+    resultsDiv.textContent= results;
+}
 function playGame() {
     let playerChoice = "";
+    
     rockBtn.addEventListener('click', () => {
         playerChoice = "rock";
-        let computerChoice = getComputerChoice();
-        let results = playRound(playerChoice, computerChoice);
-        console.log(results);
+        playRound(playerChoice);
     });
     paperBtn.addEventListener('click', () => {
         playerChoice = "paper";
-        let computerChoice = getComputerChoice();
-        let results = playRound(playerChoice, computerChoice);
-        console.log(results);
+        playRound(playerChoice);
     });
     scissorsBtn.addEventListener('click', () => {
         playerChoice = "scissors";
-        let computerChoice = getComputerChoice();
-        let results = playRound(playerChoice, computerChoice);
-        console.log(results);
+        playRound(playerChoice);
     });
 
     /*

@@ -10,3 +10,8 @@ div{
   /*background-color: white;*/
   color: orange;
 }
+#resultsDiv{
+  color: black;
+  font-size: 20px;
+  font-weight: 800;
+}

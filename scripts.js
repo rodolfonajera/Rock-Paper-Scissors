@@ -1,11 +1,3 @@
-const rockBtn = document.querySelector('#rockButton');
-const paperBtn = document.querySelector('#paperButton');
-const scissorsBtn = document.querySelector('#scissorsButton');
-const resultsDiv = document.querySelector('#resultsDiv');
-const playerDiv = document.querySelector('#playerDiv');
-const computerDiv = document.querySelector('#computerDiv');
-
-
 function getComputerChoice() {
     let computerChoice;
     let randomNumber = Math.floor(Math.random() * 3) + 1;
@@ -49,6 +41,8 @@ function getResults(playerSelection, computerSelection) {
     let results;
     if (playerSelection === computerSelection) {
         results = "TIE!";
+        playerWon++;
+        computerWon++;
     }
     else if (playerSelection === "rock" && computerSelection === "paper") {
         results = ("You lose: " + computerSelection + " beats " + playerSelection);
@@ -80,18 +74,20 @@ function getResults(playerSelection, computerSelection) {
 
     return results;
 }
-function playRound(playerChoice)
-{
-    playerDiv.textContent = playerChoice;
+function playRound(playerChoice) {
+    playerDiv.textContent = "Player choice: " + playerChoice;
     let computerChoice = getComputerChoice();
-    computerDiv.textContent = computerChoice;
+    computerDiv.textContent = "Computer choice: " + computerChoice;
     let results = getResults(playerChoice, computerChoice);
     console.log(results);
-    resultsDiv.textContent= results;
+    resultsDiv.textContent = results;
+    if (playerWon === 5 || computerWon === 5){
+        gameOver();
+    }
 }
 function playGame() {
     let playerChoice = "";
-    
+
     rockBtn.addEventListener('click', () => {
         playerChoice = "rock";
         playRound(playerChoice);
@@ -105,25 +101,36 @@ function playGame() {
         playRound(playerChoice);
     });
 
-    /*
-       if (playerWon === computerWon){
-           {
-               alert("TIE!")
-               console.log("TIE! " + playerWon + " : " + computerWon);
-           }
-       }
-       else if(playerWon > computerWon){
-           alert("Player Won: " + playerWon + " : " + computerWon);
-           console.log("Final Results- Player Won " + playerWon + " : " + computerWon);
-       }
-       else if (computerWon > playerWon){
-           alert("Computer Won: " + computerWon + " : " + playerWon);
-           console.log("Final Results- Computer Won: " + computerWon + " : " + playerWon);
-       }
-       */
+}
+function gameOver(){
+
+        if (playerWon === computerWon) {
+            {
+                alert("TIE! " + playerWon + " : " + computerWon)
+                console.log("TIE! " + playerWon + " : " + computerWon);
+            }
+        }
+        else if (playerWon > computerWon) {
+            alert("Player Won: " + playerWon + " : " + computerWon);
+            console.log("Final Results- Player Won " + playerWon + " : " + computerWon);
+        }
+        else if (computerWon > playerWon) {
+            alert("Computer Won: " + computerWon + " : " + playerWon);
+            console.log("Final Results- Computer Won: " + computerWon + " : " + playerWon);
+        }
+   
+    playerWon=0;
+    computerWon=0;
 }
 
-playerWon = 0; //global counter variables
-computerWon = 0;
-game = 0;
+const rockBtn = document.querySelector('#rockButton');
+const paperBtn = document.querySelector('#paperButton');
+const scissorsBtn = document.querySelector('#scissorsButton');
+const playerDiv = document.querySelector('#playerDiv');
+const computerDiv = document.querySelector('#computerDiv');
+const resultsDiv = document.querySelector('#resultsDiv');
+
+let playerWon = 0; //global counter variables
+let computerWon = 0;
 playGame(); // Start of Game
+
